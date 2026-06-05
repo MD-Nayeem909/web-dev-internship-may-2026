@@ -3,11 +3,11 @@ const { Pool } = require('pg');
 const fs = require('fs');
 const path = require('path');
 
-// Load environment variables. Try .env first, then fallback to .env.example
-if (fs.existsSync(path.join(__dirname, '.env'))) {
-  require('dotenv').config();
+// Load environment variables from parent directory
+if (fs.existsSync(path.join(__dirname, '../.env'))) {
+  require('dotenv').config({ path: path.join(__dirname, '../.env') });
 } else {
-  require('dotenv').config({ path: path.join(__dirname, '.env.example') });
+  require('dotenv').config({ path: path.join(__dirname, '../.env.example') });
 }
 
 const app = express();
@@ -15,8 +15,8 @@ const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
-// Serve static files from root directory
-app.use(express.static(__dirname));
+// Serve static files from root directory (parent of api/)
+app.use(express.static(path.join(__dirname, '../')));
 
 // PostgreSQL Connection Pool
 let pool;
