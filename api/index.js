@@ -15,8 +15,8 @@ const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
-// Serve static files from root directory (parent of api/)
-app.use(express.static(path.join(__dirname, '../')));
+// Serve static files from public directory
+app.use(express.static(path.join(__dirname, '../public')));
 
 // PostgreSQL Connection Pool
 let pool;
