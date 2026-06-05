@@ -189,6 +189,10 @@ app.post('/api/save-questions', async (req, res) => {
 });
 
 // Start the server
-app.listen(port, () => {
-  console.log(`MCQ Question Parser server is running at http://localhost:${port}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => {
+    console.log(`MCQ Question Parser server is running at http://localhost:${port}`);
+  });
+}
+
+module.exports = app;
